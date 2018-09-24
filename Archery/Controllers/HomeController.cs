@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Archery.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,7 +17,14 @@ namespace Archery.Controllers
 
         public ActionResult About()
         {
-            return View();
+            var modelInfo = new Info
+            {
+                DevName = "Vincent",
+                ContactMail = "kmjlh",
+                CreatedDate = DateTime.Now
+
+            };
+            return View(modelInfo);
 
         }
 
