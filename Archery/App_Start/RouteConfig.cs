@@ -12,6 +12,14 @@ namespace Archery
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.MapMvcAttributeRoutes(); // a mettre si on veut pouvoir définir une route dans le controleur avec un atribut.
+            
+            /*
+            routes.MapRoute(
+             name: "AboutRoute",
+            url: "a-propos",
+            defaults: new { controller = "Home", action = "About" }
+);*/
 
             routes.MapRoute(
                 name: "Default",
