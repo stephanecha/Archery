@@ -12,6 +12,8 @@ namespace Archery.Controllers
         // GET: Home
         public ActionResult Index()
         {
+            ViewData["Title"] = "Acceuil";
+
             return View();
         }
         [Route("a-propos")]
