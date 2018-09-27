@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Archery.Validators;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -40,7 +41,9 @@ namespace Archery.Models
         [Required(ErrorMessage = "Le champs {0} est mandatory")]
         [Display(Name = "Date naissance")]
         [DataType(DataType.Date)]
-        [Range(9, 100, ErrorMessage = "age mini 9ans")]
+        //[Range(9, 100, ErrorMessage = "age mini 9ans")]
+        [Age(8, 18, ErrorMessage = "age mini {1}ans age maxi{2}")]
+       // [Age(8, ErrorMessage = "age mini {1}ans")]
         public DateTime BirthDate { get; set; }
 
         // public bool getAge(DateTime birthDate)

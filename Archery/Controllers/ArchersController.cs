@@ -18,7 +18,10 @@ namespace Archery.Controllers
         [HttpPost]
         public ActionResult Subscribe(Archer archer)
         {
-
+            //if (DateTime.Now.AddYears(-9) <= archer.BirthDate)
+            //{
+            //    ModelState.AddModelError("Birthdate", "Date de naissance invalide");
+            //}
             if(ModelState.IsValid)
             {
                 //...
