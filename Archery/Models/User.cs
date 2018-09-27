@@ -24,8 +24,7 @@ namespace Archery.Models
         [Required(ErrorMessage = "Le champs {0} est mandatory")]
         [Display(Name = "Mot de passe")]
 
-        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{6,}$",
-            ErrorMessage = "{0} incorrect.")]
+       // [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{6,}$", ErrorMessage = "{0} incorrect.")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
         [Required(ErrorMessage = "Le champs {0} est mandatory")]

@@ -25,16 +25,24 @@ namespace Archery.Validators
 
         public override bool IsValid(object value)
         {
-            if (value is DateTime)
+
+            if (value != null)
             {
 
-                if ((this.MaximumAge) != 0)
-                    return ((DateTime.Now.AddYears(-this.MinimumAge) >= (DateTime)value) && (DateTime.Now.AddYears(-this.MaximumAge) <= (DateTime)value));
+
+                if (value is DateTime)
+                {
+
+                    if ((this.MaximumAge) != 0)
+                        return ((DateTime.Now.AddYears(-this.MinimumAge) >= (DateTime)value) && (DateTime.Now.AddYears(-this.MaximumAge) <= (DateTime)value));
+                    else
+                        return DateTime.Now.AddYears(-this.MinimumAge) >= (DateTime)value;
+                }
                 else
-                    return DateTime.Now.AddYears(-this.MinimumAge) >= (DateTime)value;
+                    throw new ArgumentException("Le type doit etre un DateTime");
             }
-            else
-                throw new ArgumentException("Le type doit etre un DateTime");
+            return false;
+
         }
 
         public override string FormatErrorMessage(string name)
