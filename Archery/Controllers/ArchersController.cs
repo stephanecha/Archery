@@ -8,10 +8,10 @@ using System.Web.Mvc;
 
 namespace Archery.Controllers
 {
-    public class ArchersController : Controller
+    public class ArchersController : BaseController
     {
 
-        private ArcheryDbContext db = new ArcheryDbContext();
+       // private ArcheryDbContext db = new ArcheryDbContext();
 
         // GET: Players
         public ActionResult Subscribe()
@@ -31,11 +31,14 @@ namespace Archery.Controllers
                 //...
                 db.Archers.Add(archer);
                 db.SaveChanges();
-                ViewData["Message"] = "BRAVO";
+                //ViewData["Message"] = "BRAVO Archer enregistré";
+                TempData["MessageType"] = "success";
+                TempData["Message"] = "BRAVO Archer enregistré";
+                Display("BRAVO Archer enregistré");
                 return RedirectToAction("index", "home");
             }
             else
-                ViewData["Message"] = "T'es un gros con";
+                ViewData["Message"] = "a marche pas";
 
             return View();
         }

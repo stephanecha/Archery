@@ -64,16 +64,16 @@ namespace Archery.Models
         //}
          
 
-          [RegularExpression(@"(^[3]{1}[1-9]{1}$)|(^[4-9]{1}[0-9]{1}$)|(^[1-9]{1}[0-9]{2,1000}$)")]     
-         public int getAge
-        {
-            get
-            {
+        //  [RegularExpression(@"(^[3]{1}[1-9]{1}$)|(^[4-9]{1}[0-9]{1}$)|(^[1-9]{1}[0-9]{2,1000}$)")]     
+        // public int getAge
+        //{
+        //    get
+        //    {
 
-                return DateTime.Now.Year - BirthDate.Year;
+        //        return DateTime.Now.Year - BirthDate.Year;
 
-            }
+        //    }
 
-        }
+        //}
     }
 }
