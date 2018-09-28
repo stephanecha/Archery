@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -23,19 +24,22 @@ namespace Archery.Models
         public string Mail { get; set; }
         [Required(ErrorMessage = "Le champs {0} est mandatory")]
         [Display(Name = "Mot de passe")]
-
        // [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{6,}$", ErrorMessage = "{0} incorrect.")]
         [DataType(DataType.Password)]
+        [StringLength(150)]
         public string Password { get; set; }
         [Required(ErrorMessage = "Le champs {0} est mandatory")]
         [DataType(DataType.Password)]
         [Display(Name = "Confirmation Mot de passe")]
+        [NotMapped]
         public string ConfirmedPassword { get; set; }
         [Required(ErrorMessage = "Le champs {0} est mandatory")]
+        [StringLength(50)]
         [Display(Name = "Nom")]
         public string LastName { get; set; }
         [Required(ErrorMessage = "Le champs {0} est mandatory")]
         [Display(Name = "Prenom")]
+        [StringLength(50)]
         public string FirstName { get; set; }
         [Required(ErrorMessage = "Le champs {0} est mandatory")]
         [Display(Name = "Date naissance")]
@@ -43,6 +47,7 @@ namespace Archery.Models
         //[Range(9, 100, ErrorMessage = "age mini 9ans")]
         [Age(8, 18, ErrorMessage = "age mini {1}ans age maxi{2}")]
        // [Age(8, ErrorMessage = "age mini {1}ans")]
+       [Column(TypeName ="datetime2")]
         public DateTime BirthDate { get; set; }
 
         // public bool getAge(DateTime birthDate)

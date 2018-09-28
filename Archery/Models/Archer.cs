@@ -9,6 +9,7 @@ namespace Archery.Models
     public class Archer : User
     {
         [Display(Name = "Numéro de licence")]
+        [StringLength(50)]
         public string LicenseNumber { get; set; }
     }
 }
