@@ -21,6 +21,7 @@ namespace Archery.Models
         //     , ErrorMessage = "Le format n'est pas bon.")] 
 
         [RegularExpression((@"^([\w]+)@([\w]+)\.([\w]+)$"))]
+        [Index(IsUnique =true)]
         public string Mail { get; set; }
         [Required(ErrorMessage = "Le champs {0} est mandatory")]
         [Display(Name = "Mot de passe")]

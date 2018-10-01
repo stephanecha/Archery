@@ -35,8 +35,15 @@ namespace Archery.Controllers
             if (ModelState.IsValid)
             {
                 //...
+               // archer.Password = Password.HashMD5(archer.Password);
+                archer.Password = archer.Password.HashMD5();
+                db.Configuration.ValidateOnSaveEnabled = false;
+
                 db.Archers.Add(archer);
                 db.SaveChanges();
+
+                db.Configuration.ValidateOnSaveEnabled = true;
+
                 //ViewData["Message"] = "BRAVO Archer enregistré";
                 TempData["MessageType"] = "success";
                 TempData["Message"] = "BRAVO Archer enregistré";
