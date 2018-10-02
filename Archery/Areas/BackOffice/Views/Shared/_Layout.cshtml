@@ -25,7 +25,16 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Armes <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="@Url.Action("create", "weapons")">Ajouter</a></li>
-                            <li><a href="@Url.Action("index", "weapons")">Lister</a></li>
+                            <li><a href="@Url.Action("Index", "weapons" )">Lister</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tournois <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="@Url.Action("create", "Tournaments")">Ajouter</a></li>
+                            <li><a href="@Url.Action("Index", "Tournaments" )">Lister</a></li>
                         </ul>
                     </li>
                 </ul>
