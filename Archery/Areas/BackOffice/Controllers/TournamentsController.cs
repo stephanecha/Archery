@@ -84,6 +84,14 @@ namespace Archery.Areas.BackOffice.Controllers
             {
                 return HttpNotFound();
             }
+            MultiSelectList weaponsValues = new MultiSelectList(db.Weapons, "ID", "Name");
+            ViewBag.Weapons = weaponsValues;
+
+             /*tournament = db.Tournaments.Include("Weapons").SingleOrDefault(x => x.ID == id);
+            ViewBag.Weapons = tournament.Weapons.ToList();*/
+
+
+
             return View(tournament);
         }
 
@@ -92,11 +100,15 @@ namespace Archery.Areas.BackOffice.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Name,Location,StartDate,EndDate,ArcherCount,Price,Description")] Tournament tournament)
+        public ActionResult Edit([Bind(Include = "ID,Name,Location,StartDate,EndDate,ArcherCount,Price,Description")] Tournament tournament, int[] WeaponsID)
         {
             if (ModelState.IsValid)
             {
+                tournament.Weapons = db.Weapons.Where(x => WeaponsID.Contains(x.ID)).ToList();
+                //db.Tournaments.Add(tournament);
+
                 db.Entry(tournament).State = EntityState.Modified;
+                //db.Entry(tournament.Weapons).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
