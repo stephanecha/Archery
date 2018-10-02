@@ -113,6 +113,11 @@
     <Content Include="Areas\BackOffice\Views\_ViewStart.cshtml" />
     <Content Include="Areas\BackOffice\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\BackOffice\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\BackOffice\Views\Weapons\Create.cshtml" />
+    <Content Include="Areas\BackOffice\Views\Weapons\Delete.cshtml" />
+    <Content Include="Areas\BackOffice\Views\Weapons\Details.cshtml" />
+    <Content Include="Areas\BackOffice\Views\Weapons\Edit.cshtml" />
+    <Content Include="Areas\BackOffice\Views\Weapons\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Images\Alexina.jpg" />
     <Content Include="Images\HG.jpg" />
@@ -133,6 +138,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\BackOffice\BackOfficeAreaRegistration.cs" />
     <Compile Include="Areas\BackOffice\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\BackOffice\Controllers\WeaponsController.cs" />
+    <Compile Include="Migrations\201810011512056_AddTournoi.cs" />
+    <Compile Include="Migrations\201810011512056_AddTournoi.Designer.cs">
+      <DependentUpon>201810011512056_AddTournoi.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Shooter.cs" />
     <Compile Include="Models\Tournament.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -182,6 +192,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\BackOffice\Models\" />
+    <Folder Include="Areas\BackOffice\Views\Weapon\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201809271418538_Init.resx">
@@ -189,6 +200,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810011038014_AddUniqueEmailUser.resx">
       <DependentUpon>201810011038014_AddUniqueEmailUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810011512056_AddTournoi.resx">
+      <DependentUpon>201810011512056_AddTournoi.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
