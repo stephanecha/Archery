@@ -7,10 +7,12 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Archery.Data;
+using Archery.Filters;
 using Archery.Models;
 
 namespace Archery.Areas.BackOffice.Controllers
 {
+    [Authentication]
     public class TournamentsController : Controller
     {
         private ArcheryDbContext db = new ArcheryDbContext();
@@ -97,17 +99,13 @@ namespace Archery.Areas.BackOffice.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,Name,Location,StartDate,EndDate,ArcherCount,Price,Description")] Tournament tournament, int[] weaponsID)
         {
-
-            db.Entry(tournament).State = EntityState.Modified; //ici on ouvre une donnée dans le cache avec l'id qui est l'id du tournament.
-
+            db.Entry(tournament).State = EntityState.Modified;//ici on ouvre une donnée dans le cache avec l'id qui est l'id du tournament.
             /*tournament=*//*optionel*/
             db.Tournaments.Include("Weapons").SingleOrDefault(x => x.ID == tournament.ID);//stch lecture des weapon en base pour ce tournoi
             //ici entity va faire le lien entre tournament et db.Tournaments car ils ont le meme ID et que entity peut gerer un seul objet avec le meme ID.
 
-
             if (ModelState.IsValid)
             {
-                
                 if (weaponsID != null)
                     tournament.Weapons = db.Weapons.Where(x => weaponsID.Contains(x.ID)).ToList();//stch lecture des weapon en passé dans le post
                 else
@@ -117,7 +115,7 @@ namespace Archery.Areas.BackOffice.Controllers
                 return RedirectToAction("Index");
             }
 
-            MultiSelectList weaponsValues = new MultiSelectList(db.Weapons, "ID", "Name");
+            MultiSelectList weaponsValues = new MultiSelectList(db.Weapons, "ID", "Name", tournament.Weapons.Select(x => x.ID));
             ViewBag.Weapons = weaponsValues;
             return View(tournament);
         }
@@ -142,8 +140,20 @@ namespace Archery.Areas.BackOffice.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Tournament tournament = db.Tournaments.Find(id);
+            Tournament tournament = db.Tournaments
+                .Include("Weapons").SingleOrDefault(x => x.ID == id);
+            tournament.Weapons.Clear();
+
+            var shooters = db.Shooters.Where(x => x.TournamentID == id);
+            foreach (var item in shooters)
+            {
+                db.Entry(item).State = EntityState.Deleted;
+                //db.Shooters.Remove(item);
+            }
+
+            //db.Entry(tournament).State = EntityState.Deleted;
             db.Tournaments.Remove(tournament);
+
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -158,5 +168,3 @@ namespace Archery.Areas.BackOffice.Controllers
         }
     }
 }
- 
- 

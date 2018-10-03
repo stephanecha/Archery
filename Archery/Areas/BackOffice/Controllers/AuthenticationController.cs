@@ -23,25 +23,27 @@ namespace Archery.Areas.BackOffice.Controllers
         {
             if (ModelState.IsValid)
             {
-
+                var hash = model.Password.HashMD5();
                 var admin = db.Administrators.SingleOrDefault(
-                    x => x.Mail == model.Mail && x.Password == model.Password);
+                    x => x.Mail == model.Mail && x.Password == hash);
+
                 if (admin == null)
                 {
-                    ModelState.AddModelError("Mail", "Login/mdp invalid");
+                    ModelState.AddModelError("Mail", "Login / mot de passe invalide");
                     return View();
-
                 }
                 else
                 {
-                    return RedirectToAction("Index", "Dashboard", new { aera = "backoffice" });
+                    Session["ADMINISTRATOR"] = admin;
+                    @ViewBag.LoginName = "TOTO";
+                    Session["LoginName"] = db.Administrators.SingleOrDefault(
+                    x => x.Mail == model.Mail).FirstName;
+                    return RedirectToAction("Index", "Dashboard", new { area = "backoffice" });
                 }
 
             }
-
-
-
             return View();
         }
+
     }
 }
