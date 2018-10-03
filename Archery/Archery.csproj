@@ -309,6 +309,7 @@
     <Compile Include="Areas\BackOffice\Controllers\TournamentsController.cs" />
     <Compile Include="Areas\BackOffice\Controllers\WeaponsController.cs" />
     <Compile Include="Areas\BackOffice\Models\AuthenticationViewModels.cs" />
+    <Compile Include="Filters\AuthenticationAttribute.cs" />
     <Compile Include="Migrations\201810011512056_AddTournoi.cs" />
     <Compile Include="Migrations\201810011512056_AddTournoi.Designer.cs">
       <DependentUpon>201810011512056_AddTournoi.cs</DependentUpon>
