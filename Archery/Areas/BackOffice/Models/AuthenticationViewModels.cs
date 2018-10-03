@@ -10,10 +10,12 @@ namespace Archery.Areas.BackOffice.Models
 
 
     {
-        [Display(Name = "Name")]
+        [Display(Name = "Login")]
         [Required(ErrorMessage = "Le champs {0} est mandatory")]
         public string Mail { get; set; }
+        [Display(Name = "Mot de passe")]
+        [DataType(DataType.Password)]
         [Required(ErrorMessage = "Le champs {0} est mandatory")]
-        public int MyProperty { get; set; }
+        public string Password { get; set; }
     }
 }
