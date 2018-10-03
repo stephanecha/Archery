@@ -98,9 +98,11 @@ namespace Archery.Areas.BackOffice.Controllers
         public ActionResult Edit([Bind(Include = "ID,Name,Location,StartDate,EndDate,ArcherCount,Price,Description")] Tournament tournament, int[] weaponsID)
         {
 
-            db.Entry(tournament).State = EntityState.Modified;
+            db.Entry(tournament).State = EntityState.Modified; //ici on ouvre une donnée dans le cache avec l'id qui est l'id du tournament.
 
-            /*tournament=*//*optionel*/ db.Tournaments.Include("Weapons").SingleOrDefault(x => x.ID == tournament.ID);//stch lecture des weapon en base pour ce tournoi
+            /*tournament=*//*optionel*/
+            db.Tournaments.Include("Weapons").SingleOrDefault(x => x.ID == tournament.ID);//stch lecture des weapon en base pour ce tournoi
+            //ici entity va faire le lien entre tournament et db.Tournaments car ils ont le meme ID et que entity peut gerer un seul objet avec le meme ID.
 
 
             if (ModelState.IsValid)
