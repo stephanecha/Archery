@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Data.Entity;
 using Archery.Models;
+using System.Diagnostics;
 
 namespace Archery.Data
 {
@@ -15,6 +16,7 @@ namespace Archery.Data
 
         public ArcheryDbContext() : base("Archery")
         {
+            this.Database.Log = s => Debug.Write(s);
         }
 
         public DbSet<Administrator> Administrators { get; set; }
