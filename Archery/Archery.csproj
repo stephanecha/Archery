@@ -318,6 +318,19 @@
     <Compile Include="Migrations\201810020933521_AddDescriptionTournoi.Designer.cs">
       <DependentUpon>201810020933521_AddDescriptionTournoi.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810041020581_addtournamentpictures.cs" />
+    <Compile Include="Migrations\201810041020581_addtournamentpictures.Designer.cs">
+      <DependentUpon>201810041020581_addtournamentpictures.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810041022043_addtournamentpictures2.cs" />
+    <Compile Include="Migrations\201810041022043_addtournamentpictures2.Designer.cs">
+      <DependentUpon>201810041022043_addtournamentpictures2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810041023354_addtournamentpictures3.cs" />
+    <Compile Include="Migrations\201810041023354_addtournamentpictures3.Designer.cs">
+      <DependentUpon>201810041023354_addtournamentpictures3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HomeViewModels.cs" />
     <Compile Include="Models\Shooter.cs" />
     <Compile Include="Models\Tournament.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -340,6 +353,7 @@
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\Info.cs" />
     <Compile Include="Models\Archer.cs" />
+    <Compile Include="Models\TournamentPicture.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Weapon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -388,6 +402,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810020933521_AddDescriptionTournoi.resx">
       <DependentUpon>201810020933521_AddDescriptionTournoi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810041020581_addtournamentpictures.resx">
+      <DependentUpon>201810041020581_addtournamentpictures.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810041022043_addtournamentpictures2.resx">
+      <DependentUpon>201810041022043_addtournamentpictures2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810041023354_addtournamentpictures3.resx">
+      <DependentUpon>201810041023354_addtournamentpictures3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

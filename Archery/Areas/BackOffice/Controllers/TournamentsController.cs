@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -20,7 +21,13 @@ namespace Archery.Areas.BackOffice.Controllers
         // GET: BackOffice/Tournaments
         public ActionResult Index()
         {
-            return View(db.Tournaments.ToList());
+            return View(db.Tournaments.OrderBy(x => x.StartDate).ToList());
+        }
+
+        // GET: BackOffice/Tournaments
+        public ActionResult IndexDate()
+        {
+            return View(db.Tournaments.OrderBy(x=>x.StartDate).ToList());
         }
 
         // GET: BackOffice/Tournaments/Details/5
@@ -30,7 +37,7 @@ namespace Archery.Areas.BackOffice.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Tournament tournament = db.Tournaments.Include("Weapons").SingleOrDefault(x => x.ID == id);
+            Tournament tournament = db.Tournaments.Include("Pictures").Include("Weapons").SingleOrDefault(x => x.ID == id);
             if (tournament == null)
             {
                 return HttpNotFound();
@@ -81,7 +88,7 @@ namespace Archery.Areas.BackOffice.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Tournament tournament = db.Tournaments.Include("Weapons").SingleOrDefault(x => x.ID == id);
+            Tournament tournament = db.Tournaments.Include("Pictures").Include("Weapons").SingleOrDefault(x => x.ID == id);
             if (tournament == null)
             {
                 return HttpNotFound();
@@ -101,7 +108,7 @@ namespace Archery.Areas.BackOffice.Controllers
         {
             db.Entry(tournament).State = EntityState.Modified;//ici on ouvre une donnée dans le cache avec l'id qui est l'id du tournament.
             /*tournament=*//*optionel*/
-            db.Tournaments.Include("Weapons").SingleOrDefault(x => x.ID == tournament.ID);//stch lecture des weapon en base pour ce tournoi
+            db.Tournaments.Include("Pictures").Include("Weapons").SingleOrDefault(x => x.ID == tournament.ID);//stch lecture des weapon en base pour ce tournoi
             //ici entity va faire le lien entre tournament et db.Tournaments car ils ont le meme ID et que entity peut gerer un seul objet avec le meme ID.
 
             if (ModelState.IsValid)
@@ -157,6 +164,27 @@ namespace Archery.Areas.BackOffice.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        public ActionResult AddPicture(HttpPostedFileBase picture, int id)
+        {
+            if (picture?.ContentLength > 0)
+            {
+                var tp = new TournamentPicture();
+                tp.ContentType = picture.ContentType;
+                tp.Name = picture.FileName;
+                tp.TournamentID = id;
+                using (var reader = new BinaryReader(picture.InputStream))
+                {
+                    tp.Content = reader.ReadBytes(picture.ContentLength);
+                }
+                db.TournamentPictures.Add(tp);
+                db.SaveChanges();
+                return RedirectToAction("edit", "tournaments", new { id = id });
+            }
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        }
+
 
         protected override void Dispose(bool disposing)
         {
