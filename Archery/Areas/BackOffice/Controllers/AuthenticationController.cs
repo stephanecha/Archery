@@ -35,14 +35,17 @@ namespace Archery.Areas.BackOffice.Controllers
                 else
                 {
                     Session["ADMINISTRATOR"] = admin;
-                    @ViewBag.LoginName = "TOTO";
-                    Session["LoginName"] = db.Administrators.SingleOrDefault(
-                    x => x.Mail == model.Mail).FirstName;
                     return RedirectToAction("Index", "Dashboard", new { area = "backoffice" });
                 }
 
             }
             return View();
+        }
+
+        public ActionResult Logout()
+        {
+            Session.Remove("ADMINISTRATOR");
+            return RedirectToAction("index", "home", new { area = "" });
         }
 
     }
